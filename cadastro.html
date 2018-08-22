@@ -1,9 +1,49 @@
 <html>
-<header></header>
+<head>
+	<script type="text/javascript">
+		var candidatos=Array();
+
+		function cadastrar() {
+			var form=document.forms["cadastroprogramacaoweb"];
+		    var nome=form.elements["nome"];
+		    var data_nasc=form.elements["data_nasc"];
+		     var email=form.elements["email"];
+		      var cargo=form.elements["cargo"];
+
+		      if(nome.value===null || nome.value.trim()===''){
+		      	alert("Digite Nome");
+		      } else if(data_nasc.value===null || data_nasc.value.trim()===''){
+		      	alert("Digite Data de Nascimento");
+		      } else if(email.value===null || email.value.trim()===''){
+		      	alert("Digite E-mail");
+		      }
+
+		      var candidato = {};
+		      candidato.nome=nome;
+		      candidato.data_nasc=data_nasc;
+		      candidato.email=email;
+		       candidato.cargo=cargo;
+
+		       candidatos.push(candidato);
+
+		       var listTable = document.getElementById("listaCandidatos");
+		       var htmlTable="<tr><td>Nome</td><td>Data Nascimento</td><td>E-mail</td><td>Cargo</td></tr>";
+
+		       for(var i=0;i<candidatos.length;i++){
+		       	var c = candidatos[i];
+		       		htmlTable+="<tr><td>"+c.nome.value+"</td><td>"+c.data_nasc.value+"</td><td>"+c.email.value+"</td><td>"+c.cargo.value+"</td></tr>";
+		       }
+
+		       listTable.innerHTML = htmlTable;
+		       
+		}
+		
+	</script>
+</head>
 <body>
-<form>
+<form name="cadastroprogramacaoweb">
 <p>Nome do Candidato: <input type="text" name="nome"></p>
-<p>Data Nascimento: <input type="date" name="data nasc"></p>
+<p>Data Nascimento: <input type="date" name="data_nasc"></p>
 <p>E-mail: <input type="email" name="email"></p>
 <p>Cargo Candidato: 
 <select name="cargo">
@@ -11,7 +51,8 @@
 <option> Arquiteto de Software</option>	
 </select>
 </p>
-<p><input type="submit" name="cadastrar" value="Cadastrar"></p>
+<p><div onclick="cadastrar();">Cadastrar</div></p>
 </form>
+<table id="listaCandidatos"></table>
 </body>
 </html>
