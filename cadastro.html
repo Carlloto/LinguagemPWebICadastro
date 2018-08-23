@@ -12,47 +12,122 @@
 
 		      if(nome.value===null || nome.value.trim()===''){
 		      	alert("Digite Nome");
+		      	return;
 		      } else if(data_nasc.value===null || data_nasc.value.trim()===''){
 		      	alert("Digite Data de Nascimento");
+		      	return;
 		      } else if(email.value===null || email.value.trim()===''){
 		      	alert("Digite E-mail");
+		      	return;
 		      }
 
 		      var candidato = {};
-		      candidato.nome=nome;
-		      candidato.data_nasc=data_nasc;
-		      candidato.email=email;
-		       candidato.cargo=cargo;
+		      candidato.nome=nome.value;
+		      candidato.data_nasc=data_nasc.value;
+		      candidato.email=email.value;
+		       candidato.cargo=cargo.value;
 
 		       candidatos.push(candidato);
 
 		       var listTable = document.getElementById("listaCandidatos");
-		       var htmlTable="<tr><td>Nome</td><td>Data Nascimento</td><td>E-mail</td><td>Cargo</td></tr>";
+		       var htmlTable="<thead><tr><td>Nome</td><td>Data Nascimento</td><td>E-mail</td><td>Cargo</td></tr></thead>";
 
 		       for(var i=0;i<candidatos.length;i++){
 		       	var c = candidatos[i];
-		       		htmlTable+="<tr><td>"+c.nome.value+"</td><td>"+c.data_nasc.value+"</td><td>"+c.email.value+"</td><td>"+c.cargo.value+"</td></tr>";
+		       		htmlTable+="<tr><td>"+c.nome+"</td><td>"+c.data_nasc+"</td><td>"+c.email+"</td><td>"+c.cargo+"</td></tr>";
 		       }
 
 		       listTable.innerHTML = htmlTable;
+
+		       nome.value='';
+		       data_nasc.value='';
+		       email.value='';
 		       
 		}
 		
 	</script>
+
+	<style type="text/css">
+		.cadastro{
+			margin-top: 5%;
+			border: 1px solid #ccc;
+			background-color: #ccc;
+			position: absolute;
+			padding: 10px;
+			border-radius: 1em;
+		}
+
+		input{
+			margin-left: 15px;
+		}
+
+		p input{
+			float: right;
+		}
+
+		h1{
+			padding-top: 2%;
+			margin-bottom: -4%;
+			text-align: left;
+		}
+
+		h2{
+			position: absolute;
+			margin-top: 23%;
+		}
+
+		#cargo{
+			margin-left: 32px;
+		}
+
+		#data_nasc{
+			margin-right: 15px;
+		}
+
+		#botao{
+			border: 1px solid blue;
+			background-color: blue;
+			padding: 2px;
+			text-align: center;
+			border-radius: 1em;
+			color: white;
+		}
+
+		table{
+			position: absolute;
+			margin-top: 25%; 
+			border: 1px solid #ccc;
+		}
+
+		table thead{
+			background-color: blue;
+			color: white;
+
+		}
+
+		table td{
+			border: 1px solid #ccc;
+		}
+	</style>
 </head>
 <body>
+	<h1>Cadastro de Candidatos</h1>
+	<div class="cadastro">
 <form name="cadastroprogramacaoweb">
 <p>Nome do Candidato: <input type="text" name="nome"></p>
-<p>Data Nascimento: <input type="date" name="data_nasc"></p>
+<p>Data Nascimento: <input id="data_nasc" type="date" name="data_nasc"></p>
 <p>E-mail: <input type="email" name="email"></p>
 <p>Cargo Candidato: 
-<select name="cargo">
+<select id="cargo" name="cargo">
 <option> Gerente de Projeto</option>
-<option> Arquiteto de Software</option>	
+<option> Arquiteto de Software</option>
+<option> Analista de Teste</option>
 </select>
 </p>
-<p><div onclick="cadastrar();">Cadastrar</div></p>
+<p><div id="botao" onclick="cadastrar();">Cadastrar</div></p>
 </form>
+</div>
+<h2>Cadastrados</h2>
 <table id="listaCandidatos"></table>
 </body>
 </html>
